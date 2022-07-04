@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="svn://avatar"
+   name=""
+   revision="115"
+   last-author="Russ"
+   url="svn://avatar/rb/public/assets/2007/4/10"
+   uuid="83902b8e-9c7b-0d4c-b3a2-53228fd6c3fa"
+   committed-rev="110"
+   kind="dir"
+   committed-date="2007-04-10T03:36:38.718750Z"/>
+<entry
+   name="03_1280.jpg"
+   checksum="34469da5560f4a9ca38de6b81c2d284b"
+   last-author="Russ"
+   text-time="2007-04-10T03:36:38.000000Z"
+   committed-rev="110"
+   kind="file"
+   committed-date="2007-04-10T03:36:38.718750Z"
+   prop-time="2007-04-11T01:37:38.000000Z"/>
+<entry
+   name="03_1280_thumb.jpg"
+   checksum="4999415ffcf2c4ed2aa209c1286d00b0"
+   last-author="Russ"
+   text-time="2007-04-10T03:36:38.000000Z"
+   committed-rev="110"
+   kind="file"
+   committed-date="2007-04-10T03:36:38.718750Z"
+   prop-time="2007-04-11T01:37:38.000000Z"/>
+<entry
+   name="03_1280_tiny.jpg"
+   checksum="d26868b5f0b39b1dab813afeba47d0bf"
+   last-author="Russ"
+   text-time="2007-04-10T03:36:38.000000Z"
+   committed-rev="110"
+   kind="file"
+   committed-date="2007-04-10T03:36:38.718750Z"
+   prop-time="2007-04-11T01:37:38.000000Z"/>
+<entry
+   name="CBR1000RR_large_04.jpg"
+   checksum="f024a7bc21964d5de351909f46728294"
+   last-author="Russ"
+   text-time="2007-04-10T03:36:38.000000Z"
+   committed-rev="110"
+   kind="file"
+   committed-date="2007-04-10T03:36:38.718750Z"
+   prop-time="2007-04-11T01:37:38.000000Z"/>
+<entry
+   name="CBR1000RR_large_04_thumb.jpg"
+   checksum="c866d9d79e4bc3c3c90b768e4711456a"
+   last-author="Russ"
+   text-time="2007-04-10T03:36:38.000000Z"
+   committed-rev="110"
+   kind="file"
+   committed-date="2007-04-10T03:36:38.718750Z"
+   prop-time="2007-04-11T01:37:38.000000Z"/>
+<entry
+   name="CBR1000RR_large_04_tiny.jpg"
+   checksum="5f937a64112c6b09e8779ba2a7b48949"
+   last-author="Russ"
+   text-time="2007-04-10T03:36:38.000000Z"
+   committed-rev="110"
+   kind="file"
+   committed-date="2007-04-10T03:36:38.718750Z"
+   prop-time="2007-04-11T01:37:38.000000Z"/>
+</wc-entries>

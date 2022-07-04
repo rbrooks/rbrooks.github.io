@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="svn://avatar"
+   name=""
+   revision="115"
+   last-author="Russ"
+   url="svn://avatar/rb/public/javascripts/lightbox2"
+   uuid="83902b8e-9c7b-0d4c-b3a2-53228fd6c3fa"
+   committed-rev="110"
+   kind="dir"
+   committed-date="2007-04-10T03:36:38.718750Z"/>
+<entry
+   name="effects.js"
+   checksum="82e25a810f86d3b8ca0ca42ef56a8956"
+   last-author="Russ"
+   committed-rev="110"
+   text-time="2007-04-10T03:36:38.000000Z"
+   kind="file"
+   committed-date="2007-04-10T03:36:38.718750Z"/>
+<entry
+   name="lightbox.js"
+   checksum="7194fe16a882c09a62a039c23ce90521"
+   last-author="Russ"
+   committed-rev="110"
+   text-time="2007-04-10T03:36:38.000000Z"
+   kind="file"
+   committed-date="2007-04-10T03:36:38.718750Z"/>
+<entry
+   name="prototype.js"
+   checksum="ec266084ece29ede795db38c9c8cbf3d"
+   last-author="Russ"
+   committed-rev="110"
+   text-time="2007-04-10T03:36:38.000000Z"
+   kind="file"
+   committed-date="2007-04-10T03:36:38.718750Z"/>
+<entry
+   name="scriptaculous.js"
+   checksum="696bd054b0069b60748474abb87b28b7"
+   last-author="Russ"
+   committed-rev="110"
+   text-time="2007-04-10T03:36:38.000000Z"
+   kind="file"
+   committed-date="2007-04-10T03:36:38.718750Z"/>
+</wc-entries>

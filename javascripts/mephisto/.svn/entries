@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   name=""
+   repos="svn://avatar"
+   revision="115"
+   last-author="Administrator"
+   uuid="83902b8e-9c7b-0d4c-b3a2-53228fd6c3fa"
+   url="svn://avatar/rb/public/javascripts/mephisto"
+   committed-rev="96"
+   kind="dir"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+<entry
+   name="application.js"
+   checksum="be21307e3f785aacd97ce032bdbf3009"
+   last-author="Administrator"
+   text-time="2007-02-19T04:27:30.000000Z"
+   committed-rev="96"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+<entry
+   name="cookie.js"
+   checksum="9fb8ca93826de7c52efe7a0e41724463"
+   last-author="Administrator"
+   text-time="2007-02-19T04:27:30.000000Z"
+   committed-rev="96"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+<entry
+   name="dialog.js"
+   checksum="e037d74993c1be3fd8af8eef2607803a"
+   last-author="Administrator"
+   text-time="2007-02-19T04:27:30.000000Z"
+   committed-rev="96"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+<entry
+   name="dragdrop.js"
+   checksum="d13b65a8ad4aee1860b72520fad24b92"
+   last-author="Administrator"
+   text-time="2007-02-19T04:27:30.000000Z"
+   committed-rev="96"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+<entry
+   name="effects.js"
+   checksum="844f6a15a61b7cdab2fbffa17c68db5c"
+   last-author="Administrator"
+   text-time="2007-02-19T04:27:30.000000Z"
+   committed-rev="96"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+<entry
+   name="lowpro.js"
+   checksum="a3fb45f0faa0f350fd7f32f11cce81c2"
+   last-author="Administrator"
+   text-time="2007-02-19T04:27:30.000000Z"
+   committed-rev="96"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+<entry
+   name="prototype.js"
+   checksum="aff24f9d81385fe0ee985392f844080c"
+   last-author="Administrator"
+   text-time="2007-02-19T04:27:30.000000Z"
+   committed-rev="96"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+</wc-entries>

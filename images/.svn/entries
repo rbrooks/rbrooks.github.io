@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   name=""
+   repos="svn://avatar"
+   revision="115"
+   last-author="Russ"
+   uuid="83902b8e-9c7b-0d4c-b3a2-53228fd6c3fa"
+   url="svn://avatar/rb/public/images"
+   committed-rev="110"
+   kind="dir"
+   committed-date="2007-04-10T03:36:38.718750Z"/>
+<entry
+   name="lightbox2"
+   kind="dir"/>
+<entry
+   name="mephisto"
+   kind="dir"/>
+</wc-entries>

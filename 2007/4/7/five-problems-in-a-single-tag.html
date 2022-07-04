@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Russell Brooks | Russ Brooks -   Five Problems in a Single Tag </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link href="/stylesheets/main.css" rel="stylesheet" type="text/css" />
+	<link href="/stylesheets/lightbox.css" rel="stylesheet" type="text/css" />
+	<script src="/javascripts/lightbox2/prototype.js" type="text/javascript"></script>
+	<script src="/javascripts/lightbox2/scriptaculous.js?load=effects" type="text/javascript"></script>
+	<script src="/javascripts/lightbox2/lightbox.js" type="text/javascript"></script>
+	<link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
+</head>
+	<body>
+		<div id="wrap">
+
+			<div id="nav">
+				<a href="/" class="home" id="current">&nbsp;</a>
+				<a href="/portfolio/" class="portfolio">&nbsp;</a>
+				<a href="/links/" class="links">&nbsp;</a>
+				<a href="/bio/" class="bio">&nbsp;</a>
+				<a href="/colophon/" class="colophon">&nbsp;</a>
+			</div>
+
+			<div id="banner">
+				<img id="bannerpic" src="/images/banner.jpg" width="816" height="186" alt="Autumn Sycamore, by: Russell Brooks" title="Autumn Sycamore, by: Russell Brooks" />
+			</div>
+
+			<img src="/images/div_shadow_line.gif" width="904" height="33" alt="" style="float: left;" /><div id="content">
+				<div id="content_left">
+					
+  
+<div class="entry entry-31">
+	<h2><a href="/2007/4/7/five-problems-in-a-single-tag">Five Problems in a Single Tag</a></h2> 
+	<p class="date">April 6th, 2007</p>
+
+	
+		<p>I found this grossly problematic tag checked into a source-control system recently.  I had to save it because I&#8217;ve never seen this many problems exist in a single HTML tag.</p>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre><tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }"><span class="ta">&lt;font</span> <span class="an">style</span>=<span class="s"><span class="dl">&quot;</span><span class="k">font-size: 8pt; vertical-align: middle; color: #666666;</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span></pre></td>
+</tr></table>
+		
+		
+		
+		  <ol>
+<li><p>The <code>&lt;font&gt;</code> tag has been deprecated since the fall of the HTML 4 spec about 8 years ago because it is considered inline style.  It is regarded as a mistake by those who added it to early specs.  It&#8217;s use is highly frowned upon in the web development community and I&#8217;m surprised this news has not caught up to this &#8220;senior&#8221; developer.</p>
+
+<p>Because it has a <code>style</code> attribute, we have&#8230;</p></li>
+<li><p>Inline style embedded in inline style.  Very creative.  I&#8217;ve never seen that before in my decade of web experience.</p></li>
+<li><p>&#8220;vertical-align: middle&#8221; makes <strong><em>child</em></strong> elements within a block-level element align to the
+middle.  It appears as if the developer thinks this style property will align the element
+within the parent element - or perhaps within the line that it&#8217;s in.  Impossible.  <code>&lt;font&gt;</code> is an
+inline element, not block.  It can not have elements vertically aligned within it.</p></li>
+<li><p>Middle vertical alignment is the default for every block level element since the
+browser was invented.  It&#8217;s an ambiguous style.  Same as valign=&#8221;middle&#8221; and align=&#8221;left&#8221;.
+Pure evil.</p></li>
+<li><p>A non-abbreviated color value.  It shouldn&#8217;t be there to begin with, but if you&#8217;re going to use it, at least use the shortcut, #666;</p></li>
+</ol>
+		
+	
+	<p class="comment_links">
+		<span class="postedby">Posted by rbrooks</span>
+		<span class="filedto">Filed in <a href="/web-design">Web Design</a></span>
+	
+	</p>
+	
+</div>
+
+
+  <div class="commentsblock">
+    
+
+
+
+
+
+<form id="comment-form" method="post" action="/2007/4/7/five-problems-in-a-single-tag/comments#comment-form">
+<fieldset id="addComment">
+	<legend runat="server" id="legComment">Add Comment</legend>
+
+	<p class="fieldReq">White fields are required.</p>
+
+	<div class="fieldReq">
+		<label for="author">Name :</label>
+		<input type="text" id="comment_author" name="comment[author]" value="" />
+	</div>
+	<div class="fieldNotReq">
+		<label for="email">Email :</label>
+		<input type="text" id="comment_author_email" name="comment[author_email]" value="" />
+	</div>
+	<div class="fieldNotReq">
+		<label for="url">Website :</label>
+		<input type="text" id="comment_author_url" name="comment[author_url]" value="" />
+	</div>
+	<div class="fieldReq">
+		<label for="comment">Comment :</label><br />
+		<textarea name="comment[body]" id="comment" rows="12"></textarea>
+	</div>
+</fieldset>
+<p><input name="submit" type="submit" id="submit" value="Post Comment" class="btn" /></p>
+</form>
+
+<p><strong>Posting Info:</strong> <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> and <a href="http://daringfireball.net/projects/smartypants/">SmartyPants</a> are supported for formatting and punctuation respectively. Your email address will never be published. Your name will link to your website address, if entered. Inappropriate comments will be edited or deleted.</p>
+
+
+
+  </div>
+
+
+
+				</div>
+    				<img src="/images/div_archives.gif" alt="Archives" style="float: left;" />
+	    			<div id="sidebar_right">
+    					<img src="/images/title_categories.gif" width="68" height="9" alt="Categories" title="Categories" class="sidebar_subhead" />
+					<ul>
+							<li><a href="/">Home</a></li><li><a href="/ruby-on-rails">Ruby on Rails</a></li><li><a href="/web-design">Web Design</a></li><li><a href="/artwork">Artwork</a></li><li><a href="/php">PHP</a></li>
+					</ul>
+					<form method="get" id="sform" action="/search">
+						<img src="/images/title_search.gif" width="43" height="9" alt="Search" title="Search" class="sidebar_subhead" /><br />
+						<div class="fieldNotReq">
+							<input type="text" id="q" value="" name="q" size="25" />
+						</div>
+					</form>
+    				</div>
+    			</div>
+			<div id="footer">
+	    			<p>
+        				<a href="/">HOME</a> |
+
+	<a href="/portfolio">Portfolio</a> | <a href="/links">Links</a> | <a href="/bio">Bio</a> | <a href="/colophon">Colophon</a> | 
+<br />
+        				Copyright &copy; 2007; Russell H. Brooks
+    				</p>
+    			</div>
+    		</div>
+    		<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    		<script type="text/javascript">
+    		    		_uacct = "UA-1695100-1";
+    		    		urchinTracker();
+    		</script>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="svn://avatar"
+   name=""
+   revision="115"
+   last-author="Russ"
+   url="svn://avatar/rb/public/stylesheets"
+   uuid="83902b8e-9c7b-0d4c-b3a2-53228fd6c3fa"
+   committed-rev="110"
+   kind="dir"
+   committed-date="2007-04-10T03:36:38.718750Z"/>
+<entry
+   name="lightbox.css"
+   checksum="4e038f9778af943bca84a73a9cd0bd7e"
+   last-author="Russ"
+   text-time="2007-04-10T03:36:38.000000Z"
+   committed-rev="110"
+   kind="file"
+   committed-date="2007-04-10T03:36:38.718750Z"/>
+<entry
+   name="mephisto"
+   kind="dir"/>
+</wc-entries>

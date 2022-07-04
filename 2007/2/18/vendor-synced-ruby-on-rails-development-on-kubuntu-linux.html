@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Russell Brooks | Russ Brooks -   Rails Development Notes - Initial Environment Setup </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link href="/stylesheets/main.css" rel="stylesheet" type="text/css" />
+	<link href="/stylesheets/lightbox.css" rel="stylesheet" type="text/css" />
+	<script src="/javascripts/lightbox2/prototype.js" type="text/javascript"></script>
+	<script src="/javascripts/lightbox2/scriptaculous.js?load=effects" type="text/javascript"></script>
+	<script src="/javascripts/lightbox2/lightbox.js" type="text/javascript"></script>
+	<link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
+</head>
+	<body>
+		<div id="wrap">
+
+			<div id="nav">
+				<a href="/" class="home" id="current">&nbsp;</a>
+				<a href="/portfolio/" class="portfolio">&nbsp;</a>
+				<a href="/links/" class="links">&nbsp;</a>
+				<a href="/bio/" class="bio">&nbsp;</a>
+				<a href="/colophon/" class="colophon">&nbsp;</a>
+			</div>
+
+			<div id="banner">
+				<img id="bannerpic" src="/images/banner.jpg" width="816" height="186" alt="Autumn Sycamore, by: Russell Brooks" title="Autumn Sycamore, by: Russell Brooks" />
+			</div>
+
+			<img src="/images/div_shadow_line.gif" width="904" height="33" alt="" style="float: left;" /><div id="content">
+				<div id="content_left">
+					
+  
+<div class="entry entry-2">
+	<h2><a href="/2007/2/18/vendor-synced-ruby-on-rails-development-on-kubuntu-linux">Rails Development Notes - Initial Environment Setup</a></h2> 
+	<p class="date">February 17th, 2007</p>
+
+	
+		<p>Having been smitten by the Ruby bug, I set about getting a Ruby on Rails development environment set up on Kubuntu and Windows.  What follows are my notes on the matter.</p>
+		
+		
+		
+		  <h2>Definitions</h2>
+
+<p>Let me get some definitions out of the way, so that this article is clearer.</p>
+
+<ul>
+<li><p><strong><a href="http://www.eclipse.org/">Eclipse</a></strong> - Eclipse is a widely-used, free, software-development tool used primarily for Java, PHP, Python, Ruby, and Rails development.</p></li>
+<li><p><strong><a href="http://en.wikipedia.org/wiki/Integrated_Development_Environment">IDE</a></strong> - Integrated Development Environment.  Refers to any high-end software development tool such as Visual Studio, Eclipse, Komodo, and Borland Developer Studio.</p></li>
+<li><p><strong><a href="http://www.radrails.org/">RadRails</a></strong> - RadRails comes in two flavors, a plugin for the Eclipse IDE and a standalone application. The standalone RadRails app is a scaled-back version of Eclipse running the RadRails and Subclipse plugins.  Some Eclipse features have been removed.  I refer to this as &#8220;RadRails Standalone&#8221; in the rest of this article to differentiate it from the &#8220;RadRails Plugin&#8221;.</p></li>
+<li><p><strong><a href="http://subclipse.tigris.org/">Subclipse</a></strong> - A plugin for Eclipse that integrates Subversion into the IDE.  Subclipse allows easy right-click access to Subversion&#8217;s commands directly from your IDE without using the command-line.</p></li>
+<li><p><strong><a href="http://subversion.tigris.org/">Subversion</a></strong> - Commonly referred to as SVN, Subversion is a modern source-control system [or &#8220;revision-control system&#8221;] that was branched from the classic CVS code.  It was designed to fix a number of long-standing problems and developer complaints about CVS.</p></li>
+</ul>
+
+<h2>Goals</h2>
+
+<ol>
+<li><p>Set up a Ruby on Rails development environment on Linux [Kubuntu] and Windows.</p></li>
+<li><p>All source code under version control in a Subversion repository [on a Windows 2003 Server]</p></li>
+<li><p>Use RadRails IDE. [Full-blown Eclipse wasn&#8217;t in the initial plans, but it turned out, I had no choice in the matter.]</p></li>
+<li><p>Get an online journal [&#8220;blog&#8221;] running</p></li>
+<li><p>If third-party blog is used, have a &#8220;working copy&#8221; codeline that can be synced with new vendor releases.</p></li>
+<li><p>Explore Typo 4 and Mephisto blogging apps</p></li>
+<li><p>Weigh SQLite 3 against MySQL database.  Decide which is best suited to a low-traffic personal site.</p></li>
+<li><p>Mongrel web server for development.  Explore Apache/Mongrel cluster for production environment.</p></li>
+</ol>
+
+<h2>Do not Use RadRails Standalone</h2>
+
+<p>Do not use RadRails Standalone if you plan to house your code in the latest version of the Subversion source-control system and you want to use the IDE&#8217;s integrated source management features.  All developers should be housing their code in a source-control system, even if you are a single-person team, so in other words, don&#8217;t use RadRails Standalone. Instead, use Eclipse with the RadRails and Subclipse plugins. Allow me to explain.</p>
+
+<p>There are some version mismatch problems between the version of the Subclipse client that is built into RadRails Standalone and the latest Subversion server versions. The version of the Subclipse plugin that comes with RadRails Standalone is several versions behind and can not be upgraded manually. For example, RadRails 0.7.2 is bundled with Subclipse 1.0.3. Subclipse 1.0.3 does not work properly with newer Subversion server versions, such as 1.4. This issues have been fixed in the latest Subclipse versions [currently 1.1.9], but RadRails doesn&#8217;t let you upgrade thse Subclipse plugin. Prior to upgrading to full Eclipse w/RadRails plugin, I was experiencing a wide array of issues and errors with source control management in the RadRails GUI: cryptic errors, blank dialog boxes, stuck at every turn.</p>
+
+<p>The plugins in RadRails Standalone can not be manually updated. For reliability purposes, the developers appear to have configured RadRails Standalone to work as a single unit, plugins and all. They have disabled the plugin update features. There is no <strong>Help > Software Updates</strong> area which you would usually use to update plugins. This leaves you no options if you want to upgrade a plugin. You must wait until the RadRails Standalone developers release a new version, and hope they upgraded the plugin. It&#8217;s best to install Eclipse and the RadRails and Subclipse plugins manually.</p>
+
+<p>On [K]ubuntu, installing Eclipse is simply a matter of using your favorite package manager.</p>
+
+<pre><code>$ apt-get install eclipse
+</code></pre>
+
+<p>On Windows, install the <a href="http://www.eclipse.org/downloads/">Eclipse SDK</a>. That is the original Eclipse.  I can&#8217;t vouch for any of the third-party &#8220;Distros&#8221; on that page.</p>
+
+<h2>Install RadRails and Subclipse Plugins in Eclipse</h2>
+
+<p>Launch Eclipse and follow these instructions.</p>
+
+<ol>
+<li><p>Help > Software Updates > Find and Install</p></li>
+<li><p>Select &#8220;Search for new features to install&#8221;. Click &#8220;Next >&#8221;.</p></li>
+<li><p>Click &#8220;New Remote Site&#8221;.</p></li>
+<li><p>Enter &#8220;RadRails&#8221; for Name.</p>
+
+<p>Enter <code>http://radrails.sourceforge.net/update</code> for URL.  Click &#8220;OK&#8221;</p></li>
+<li><p>Repeat the above for:</p>
+
+<p>RubyPeople</p>
+
+<p><code>http://updatesite.rubypeople.org/release</code></p>
+
+<p>Subclipse</p>
+
+<p><code>http://subclipse.tigris.org/update</code></p></li>
+<li><p>Ensure the checkboxes next to all of the above are checked and click &#8220;Next >&#8221;.</p></li>
+<li><p>Select plugins, Subclipse and RadRails, and click &#8220;Finish&#8221;.</p></li>
+</ol>
+
+<p>Lastly, be sure to open the RadRails perspective in Eclipse.</p>
+
+<ol>
+<li><p>Window > Open Perspective > Other&#8230;</p></li>
+<li><p>Choose &#8220;Rails&#8221;.  Click OK.</p></li>
+</ol>
+
+<p>I also like to open the &#8220;Data&#8221; and &#8220;SVN Repository Exploring&#8221; perspectives.  I arrange them next to the Rails perspective in the Perspectives button bar in the upper right and close any Java perspective that was there.  The Data perspective is good if you are connecting to a MySQL database and want to manage its schema and data directly through the IDE.</p>
+
+<h2>Linux Performance Boost</h2>
+
+<p>Eclipse runs slow out of the box on some dists [I can only speak for the Ubuntu family] because it is not set to run in the Sun JVM. To make it run in the Sun JVM, <a href="http://www.ubuntuforums.org/showthread.php?t=201378">follow these instructions</a>. The performance increase was at least double for me.</p>
+
+<h2>Pulling Vendor Code from Remote Subversion Repository</h2>
+
+<p>When using a vendor codebase as your starting point, it is critical that you pull down a &#8220;tag&#8221; of a particular release. If you are from the Microsoft Visual Source Safe realm, a &#8220;tag&#8221; is analogous to a &#8220;label&#8221; in VSS speak. A tag is a static snapshot of a tested, approved, final version that was officially released to the public. Once a version is tagged, the code in that tag never changes. You have a fixed codebase from which to pull your working copy. Dynamic codelines, such as the Trunk or Branch, are usually in active development, so they are in a constant state of flux as the vendor developers check in new code. If you were to pull down one of these dynamic codelines, new changes will arrive whenever you issue an &#8220;Update&#8221; or &#8220;Checkout&#8221; command in Subversion. This can be frustrating when you&#8217;ve spent weeks developing your own features in your branch or working copy, only to find out that the codebase you linked to is now wildy different.</p>
+
+<p>This raises the question, &#8220;Why can&#8217;t I use a dynamic codeline [Trunk] as my vendor drop and simply make a personal policy to not ever issue the Checkout or Update commands? Wouldn&#8217;t that give me a static copy of the app?&#8221; The problem with this is that you end up with an unofficial, untagged code snapshot on your local machine. If you inadvertently render your app non-functioning, and you need to pull down a fresh copy of the vendor code, you have no snapshot [&#8220;tag&#8221;] to go back to. You would have to pull down a copy of a dynamic codeline such as the trunk or a branch, both of which would contain much newer code. This would create immense amount of work merging that code with your working copy.</p>
+
+<p>Tags are usually found in a &#8220;tags&#8221; directory in most repositories, for example:</p>
+
+<pre><code>/tags
+  /release_4_0_1
+  /release_4_0_2
+  /release_4_0_3
+</code></pre>
+
+<p>In this example, I&#8217;ll be pulling down a copy of the Typo blog and creating a working copy to customize.</p>
+
+<h3>Externals</h3>
+
+<p>My initial compulsion was to use Externals and simply link a folder in my project to the vendor&#8217;s latest tagged release. The trick to getting externals to work in RadRails was to always create the svn::externals property on the root folder. I was successful in getting a folder linked to a remote respository and could browse through it fine. The problems came in creating a working copy of that remote source code. The remote project DID copy to a &#8220;Trunk&#8221; folder - my working copy area - but insane things began to occur. Subversion thought those new files were already under source control - so it would not let me add them to my repository. The problem is that the hidden .svn folders came along with the app from the remote repository. [The .svn folders contain all the metadata that SVN needs to track file status.] These .svn folders in my workspace contained files that still had references to the remote repository. I read a bunch of workarounds online such as deleting the .svn directories, but nothing yielded reliable, stable results.</p>
+
+<p>NO EXTERNALS. Use IMPORT, then COPY.</p>
+
+<h3>Import</h3>
+
+<p>We&#8217;re going to use the Import command to acquire a local copy of the version 4.0.3 tagged codebase from the remote repository.</p>
+
+<p>These instructions assume you have added the Typo code repository to Eclipse&#8217;s SVN Repository Browser and you are successfully browsing their code.</p>
+
+<p>Target directory structure:</p>
+
+<pre><code>/yourapp
+  /branches
+  /tags         - Your releases
+  /trunk        - Your working copy. Where you develop your code.
+  /vendor_4_0_3  - Vendor release
+  /vendor_4_0_4  - Vendor release
+</code></pre>
+
+<ol>
+<li><p>Set workspace in Eclipse to the full path to /yourapp. You may need to use the File > Switch Workspace command. My path happens to be:
+/home/russ/dev/web/rails/mysite</p></li>
+<li><p>Right-click anywhere in the &#8220;Rails Navigation&#8221; pane. Import.</p></li>
+<li><p>Other > Checkout Projects from SVN. Next.</p></li>
+<li><p>Select the <code>svn://www.typosphere.org/typo</code> repository. Next.</p></li>
+<li><p>Open the &#8220;tags&#8221; folder and highlight the latest release, for example &#8220;release<em>4</em>0<em>3&#8221;. Other vendors may have different naming conventions such as &#8220;version</em>1<em>5</em>6&#8221;. Next.</p></li>
+<li><p>Select &#8220;Check out as new projkect in the workspace&#8221;. Type &#8220;release<em>4</em>0_3&#8221;. Unfortunately, for some reason a subfolder can not be specifed here. It tells you the / character is invalid.  <shrug></p></li>
+<li><p>Leave it set on &#8220;Head Revision&#8221;. Click &#8220;Finish&#8221;.</p></li>
+</ol>
+
+<p>If all goes well the app will pull down into your local workspace. You should see the &#8220;release<em>4</em>0_3&#8221; project.</p>
+
+<h3>Working Copy</h3>
+
+<ol>
+<li><p>Highlight every folder and file in the release<em>4</em>0_3 folder you just pulled down. Don&#8217;t highlight the root folder.</p></li>
+<li><p>Right-click. Team > Copy.</p></li>
+<li><p>Choose a destination. The &#8220;trunk&#8221; folder in the root of your project. Click OK.</p></li>
+</ol>
+
+<p>You should now have a nice unversioned working copy sitting in it&#8217;s own project called &#8220;trunk&#8221;.</p>
+
+<ol>
+<li>Right click the &#8220;trunk&#8221; project and select Team > Commit. The will add all the files and folders to your version control repository.</li>
+</ol>
+
+<p>When the vendor releases a new version, you should see a new tag in their tags folder. Simply pull that one down using the same method, and copy it over your app [backing up first, of course]. Even though you are copyng over the top of another app, Eclipse will only copy what has changed since the last time. You will need to merge any conflicting code manually. Merges are beyond the scope of this article.</p>
+
+<h3>Database Connection</h3>
+
+<ol>
+<li><p>In the /config folder, remove the &#8220;.example&#8221; extensions from database.yml.example and mail.yml.example.</p></li>
+<li><p>Open database.yml. Set your connection parameters for your database and adapter. SQLite 3 happens to be something like:</p>
+
+<p>login: &amp;login
+adapter: sqlite3
+database: /home/russ/dev/db/sqlite/mysite.sqlite</p>
+
+<p>development:
+&lt;&lt;: *login</p>
+
+<p>production:
+&lt;&lt;: *login</p>
+
+<p>test:
+database: &#8220;:memory:&#8221;
+&lt;&lt;: *login</p></li>
+</ol>
+
+<h2>Mail</h2>
+
+<ol>
+<li>Open mail.yml. Set your outgoing mail configs so Rails can send email.</li>
+</ol>
+
+<h2>Production Mode</h2>
+
+<p><strong>Very Important</strong></p>
+
+<p><strong>Run the app in production mode</strong>, or it will be painfully slow because much more is happening behind the scenes in development/debug mode, like logging, disabled caches, etc.</p>
+
+<ol>
+<li><p>Open config/environment.rb. Uncomment:</p>
+
+<p>ENV[&#8216;RAILS_ENV&#8217;] = &#8216;production&#8217;</p></li>
+</ol>
+
+<h2>Complete</h2>
+
+<p>Fire up you favorite Rails development web server (mine is Mongrel) and your good to go.</p>
+
+<h2>Typo vs. Mephisto</h2>
+
+<p>At this point in the process, I installed and reviewed the Mephisto blog/CMS application which is also written in Ruby on Rails. Having used both apps extensively now, my personal taste is now heavily in favor of Mephisto. The Mephisto developers seem to have a good sense of &#8220;tasteful restraint&#8221;, of which, I am a huge proponent. There is nothing worse than developers that throw bleeding-edge, whiz-bang gadgetry into their code for the sole reason that &#8220;it&#8217;s cool&#8221;.  Typo, unfortunately, seems to have gone in that direction.   I once saw a post to one of the Mephisto developers. The poster closed with, &#8220;Nice blog app.  Needs more AJAX.&#8221;  The Mephisto developers came back with a polite virtual chuckle and inquired, &#8220;Why?  To serve what business need?  What problem exists in Mephisto that requires a solution through the use of AJAX?&#8221;  That is a wise response and I was pleased to see it.  I watched a [former] lead developer at work riddle two fully functioning web applications with ASP.NET AJAX for absolutely no reason.  There were no problems he was solving.  There was no business need.  Now we are having problems with the apps on non-MS OSes like Mac and Linux and the code is bloated with AJAX controls when traditional postbacks would have more than done the job.  Mephisto&#8217;s code is clear and concise, free of bloat, useless features, and gratuitous AJAX.</p>
+		
+	
+	<p class="comment_links">
+		<span class="postedby">Posted by rbrooks</span>
+		<span class="filedto">Filed in <a href="/ruby-on-rails">Ruby on Rails</a></span>
+	
+	</p>
+	
+</div>
+
+
+  <div class="commentsblock">
+    
+
+
+
+
+
+<form id="comment-form" method="post" action="/2007/2/18/vendor-synced-ruby-on-rails-development-on-kubuntu-linux/comments#comment-form">
+<fieldset id="addComment">
+	<legend runat="server" id="legComment">Add Comment</legend>
+
+	<p class="fieldReq">White fields are required.</p>
+
+	<div class="fieldReq">
+		<label for="author">Name :</label>
+		<input type="text" id="comment_author" name="comment[author]" value="" />
+	</div>
+	<div class="fieldNotReq">
+		<label for="email">Email :</label>
+		<input type="text" id="comment_author_email" name="comment[author_email]" value="" />
+	</div>
+	<div class="fieldNotReq">
+		<label for="url">Website :</label>
+		<input type="text" id="comment_author_url" name="comment[author_url]" value="" />
+	</div>
+	<div class="fieldReq">
+		<label for="comment">Comment :</label><br />
+		<textarea name="comment[body]" id="comment" rows="12"></textarea>
+	</div>
+</fieldset>
+<p><input name="submit" type="submit" id="submit" value="Post Comment" class="btn" /></p>
+</form>
+
+<p><strong>Posting Info:</strong> <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> and <a href="http://daringfireball.net/projects/smartypants/">SmartyPants</a> are supported for formatting and punctuation respectively. Your email address will never be published. Your name will link to your website address, if entered. Inappropriate comments will be edited or deleted.</p>
+
+
+
+  </div>
+
+
+
+				</div>
+    				<img src="/images/div_archives.gif" alt="Archives" style="float: left;" />
+	    			<div id="sidebar_right">
+    					<img src="/images/title_categories.gif" width="68" height="9" alt="Categories" title="Categories" class="sidebar_subhead" />
+					<ul>
+							<li><a href="/">Home</a></li><li><a href="/ruby-on-rails">Ruby on Rails</a></li><li><a href="/web-design">Web Design</a></li><li><a href="/artwork">Artwork</a></li><li><a href="/php">PHP</a></li>
+					</ul>
+					<form method="get" id="sform" action="/search">
+						<img src="/images/title_search.gif" width="43" height="9" alt="Search" title="Search" class="sidebar_subhead" /><br />
+						<div class="fieldNotReq">
+							<input type="text" id="q" value="" name="q" size="25" />
+						</div>
+					</form>
+    				</div>
+    			</div>
+			<div id="footer">
+	    			<p>
+        				<a href="/">HOME</a> |
+
+	<a href="/portfolio">Portfolio</a> | <a href="/links">Links</a> | <a href="/bio">Bio</a> | <a href="/colophon">Colophon</a> | 
+<br />
+        				Copyright &copy; 2007; Russell H. Brooks
+    				</p>
+    			</div>
+    		</div>
+    		<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    		<script type="text/javascript">
+    		    		_uacct = "UA-1695100-1";
+    		    		urchinTracker();
+    		</script>
+	</body>
+</html>

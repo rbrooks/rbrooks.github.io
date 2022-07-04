@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   repos="svn://avatar"
+   name=""
+   revision="115"
+   last-author="Russ"
+   url="svn://avatar/rb/public/assets/2007/4/7"
+   uuid="83902b8e-9c7b-0d4c-b3a2-53228fd6c3fa"
+   committed-rev="110"
+   kind="dir"
+   committed-date="2007-04-10T03:36:38.718750Z"/>
+<entry
+   name="swatch_color_scheme.gif"
+   checksum="a57897ab79668b3b9ca29ef4b5ee159c"
+   last-author="Russ"
+   text-time="2007-04-10T03:36:38.000000Z"
+   committed-rev="110"
+   kind="file"
+   committed-date="2007-04-10T03:36:38.718750Z"
+   prop-time="2007-04-11T01:37:38.000000Z"/>
+</wc-entries>

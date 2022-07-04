@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Russell Brooks | Russ Brooks -   Install nginx and Mongrel Cluster on Kubuntu 7.04 [Feisty Fawn] </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link href="/stylesheets/main.css" rel="stylesheet" type="text/css" />
+	<link href="/stylesheets/lightbox.css" rel="stylesheet" type="text/css" />
+	<script src="/javascripts/lightbox2/prototype.js" type="text/javascript"></script>
+	<script src="/javascripts/lightbox2/scriptaculous.js?load=effects" type="text/javascript"></script>
+	<script src="/javascripts/lightbox2/lightbox.js" type="text/javascript"></script>
+	<link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
+</head>
+	<body>
+		<div id="wrap">
+
+			<div id="nav">
+				<a href="/" class="home" id="current">&nbsp;</a>
+				<a href="/portfolio/" class="portfolio">&nbsp;</a>
+				<a href="/links/" class="links">&nbsp;</a>
+				<a href="/bio/" class="bio">&nbsp;</a>
+				<a href="/colophon/" class="colophon">&nbsp;</a>
+			</div>
+
+			<div id="banner">
+				<img id="bannerpic" src="/images/banner.jpg" width="816" height="186" alt="Autumn Sycamore, by: Russell Brooks" title="Autumn Sycamore, by: Russell Brooks" />
+			</div>
+
+			<img src="/images/div_shadow_line.gif" width="904" height="33" alt="" style="float: left;" /><div id="content">
+				<div id="content_left">
+					
+  
+<div class="entry entry-40">
+	<h2><a href="/2007/4/21/install-nginx-mongrel-cluster-on-kubuntu">Install nginx and Mongrel Cluster on Kubuntu 7.04 [Feisty Fawn]</a></h2> 
+	<p class="date">April 21st, 2007</p>
+
+	
+		<p>Here&#8217;s how to prepare your production environment for Rails applications.</p>
+		
+		
+		
+		  <p>These instructions assume you already have Rails and Mongrel running successfully. Please see <a href="/install-rails-on-kubuntu-7-04-feisty-fawn">Install Rails On Kubuntu 7.04</a> for instructions.</p>
+
+<h2>Install nginx</h2>
+
+<ol>
+<li><p>K Menu > System > Adept Manager</p></li>
+<li><p>Search for &#8220;nginx&#8221;</p></li>
+<li><p>Add it to your install queue by clicking &#8220;nginx&#8221; and chosing &#8220;Request Install&#8221;.</p></li>
+<li><p>Click &#8220;Apply Changes&#8221; in the top nav.</p></li>
+</ol>
+
+<h2>Install Mongrel Cluster</h2>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre><tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">$ sudo gem install mongrel_cluster</pre></td>
+</tr></table>
+
+<h2>Run Them As Services on Boot</h2>
+
+<p>The install package for <strong>nginx</strong> already put a nice startup script in the <code>init.d</code> directory for us.  <strong>Mongrel</strong> came with a startup script too, but you&#8217;ll need to copy it to the <code>init.d</code> directory [all one line with a space in between the two paths. Omit the backslash.]:</p>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre>1<tt>
+</tt>2<tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">$ cp /usr/lib/ruby/gems/1.8/gems/mongrel_cluster-0.2.1/resources/mongrel_cluster \<tt>
+</tt>/etc/init.d/mongrel_cluster</pre></td>
+</tr></table>
+
+<p>Set permissions so they are executable [chmod] and make them automatically run as services on startup [update-rc.d].</p>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt>4<tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">$ sudo chmod +x /etc/init.d/nginx<tt>
+</tt>$ sudo chmod +x /etc/init.d/mongrel_cluster<tt>
+</tt>$ sudo update-rc.d nginx defaults<tt>
+</tt>$ sudo update-rc.d mongrel_cluster defaults</pre></td>
+</tr></table>
+
+<p><em>update-rc.d</em> assumes your scripts reside in the <code>/etc/init.d</code> directory. You don&#8217;t need to be in that directory nor specify the full path to the startup scripts.</p>
+
+<p>Add a line to mongrel_cluster:</p>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt>4<tt>
+</tt>5<tt>
+</tt>6<tt>
+</tt>7<tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">$ sudo nano /etc/init.d/mongrel_cluster<tt>
+</tt>&lt;macro:code&gt;<tt>
+</tt><tt>
+</tt>Add this line just above the CONF_DIR variable.<tt>
+</tt><tt>
+</tt>&lt;macro:code lang=&quot;plaintext&quot;&gt;<tt>
+</tt>PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local:/usr/local/sbin:/usr/local/bin</pre></td>
+</tr></table>
+
+<p>Create a sym link to your mongrel_cluster.yml file so the startup script can find it.</p>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt>4<tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">$ sudo rm /etc/mongrel_cluster<tt>
+</tt>$ sudo mkdir /etc/mongrel_cluster<tt>
+</tt>$ cd /etc/mongrel_cluster<tt>
+</tt>$ ln -s /var/apps/rails/rb.com/config/mongrel_cluster.yml</pre></td>
+</tr></table>
+
+<p>Alter path of that last command to match the path to your live app.</p>
+
+<h2>nginx Config File</h2>
+
+<p>The nginx configuration file need to be needs to be updated to suit your environment. My nginx.conf file looks like this [comments removed to save space].  Note that my config file is serving my app over port 8080. You would normally use port 80. [Backslashes indicate line continuation.]</p>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt>4<tt>
+</tt>5<tt>
+</tt>6<tt>
+</tt>7<tt>
+</tt>8<tt>
+</tt>9<tt>
+</tt><strong>10</strong><tt>
+</tt>11<tt>
+</tt>12<tt>
+</tt>13<tt>
+</tt>14<tt>
+</tt>15<tt>
+</tt>16<tt>
+</tt>17<tt>
+</tt>18<tt>
+</tt>19<tt>
+</tt><strong>20</strong><tt>
+</tt>21<tt>
+</tt>22<tt>
+</tt>23<tt>
+</tt>24<tt>
+</tt>25<tt>
+</tt>26<tt>
+</tt>27<tt>
+</tt>28<tt>
+</tt>29<tt>
+</tt><strong>30</strong><tt>
+</tt>31<tt>
+</tt>32<tt>
+</tt>33<tt>
+</tt>34<tt>
+</tt>35<tt>
+</tt>36<tt>
+</tt>37<tt>
+</tt>38<tt>
+</tt>39<tt>
+</tt><strong>40</strong><tt>
+</tt>41<tt>
+</tt>42<tt>
+</tt>43<tt>
+</tt>44<tt>
+</tt>45<tt>
+</tt>46<tt>
+</tt>47<tt>
+</tt>48<tt>
+</tt>49<tt>
+</tt><strong>50</strong><tt>
+</tt>51<tt>
+</tt>52<tt>
+</tt>53<tt>
+</tt>54<tt>
+</tt>55<tt>
+</tt>56<tt>
+</tt>57<tt>
+</tt>58<tt>
+</tt>59<tt>
+</tt><strong>60</strong><tt>
+</tt>61<tt>
+</tt>62<tt>
+</tt>63<tt>
+</tt>64<tt>
+</tt>65<tt>
+</tt>66<tt>
+</tt>67<tt>
+</tt>68<tt>
+</tt>69<tt>
+</tt><strong>70</strong><tt>
+</tt>71<tt>
+</tt>72<tt>
+</tt>73<tt>
+</tt>74<tt>
+</tt>75<tt>
+</tt>76<tt>
+</tt>77<tt>
+</tt>78<tt>
+</tt>79<tt>
+</tt><strong>80</strong><tt>
+</tt>81<tt>
+</tt>82<tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">worker_processes  2;<tt>
+</tt>error_log  /var/log/nginx/error.log;<tt>
+</tt>pid        /var/run/nginx.pid;<tt>
+</tt><tt>
+</tt>events {<tt>
+</tt>    worker_connections  1024;<tt>
+</tt>}<tt>
+</tt><tt>
+</tt>http {<tt>
+</tt>    include      /etc/nginx/mime.types;<tt>
+</tt>    default_type application/octet-stream;<tt>
+</tt><tt>
+</tt>    log_format  main  '$remote_addr - $remote_user [$time_local] $request '<tt>
+</tt>                      '&quot;$status&quot; $body_bytes_sent &quot;$http_referer&quot; '<tt>
+</tt>                      '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';<tt>
+</tt><tt>
+</tt>    access_log         /var/log/nginx/access.log;<tt>
+</tt><tt>
+</tt>    sendfile           on;<tt>
+</tt>    tcp_nopush         on;<tt>
+</tt>    tcp_nodelay        on;<tt>
+</tt>    keepalive_timeout  65;<tt>
+</tt><tt>
+</tt>    gzip               on;<tt>
+</tt>    gzip_http_version  1.0;<tt>
+</tt>    gzip_comp_level    2;<tt>
+</tt>    gzip_proxied       any;<tt>
+</tt>    gzip_types         text/plain text/html text/css application/x-javascript text/xml \<tt>
+</tt>                       application/xml application/xml+rss text/javascript;<tt>
+</tt><tt>
+</tt>    upstream mongrel {<tt>
+</tt>        server 127.0.0.1:8000;<tt>
+</tt>        server 127.0.0.1:8001;<tt>
+</tt>        server 127.0.0.1:8002;<tt>
+</tt>    }<tt>
+</tt><tt>
+</tt>    server {<tt>
+</tt>        listen         8080;<tt>
+</tt><tt>
+</tt>        root /var/apps/rails/rb/public;<tt>
+</tt>        index index.html index.htm;<tt>
+</tt><tt>
+</tt>        client_max_body_size    50M;<tt>
+</tt><tt>
+</tt>        access_log  /var/log/nginx/localhost.access.log;<tt>
+</tt><tt>
+</tt>        location / {<tt>
+</tt>            proxy_set_header  X-Real-IP  $remote_addr;<tt>
+</tt>            proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;<tt>
+</tt>            proxy_set_header  Host $http_host;<tt>
+</tt>            proxy_redirect    false;<tt>
+</tt>            proxy_max_temp_file_size 0;<tt>
+</tt><tt>
+</tt>            if (-f $request_filename) {<tt>
+</tt>               break;<tt>
+</tt>            }<tt>
+</tt>            if (-f $request_filename/index.html) {<tt>
+</tt>               rewrite (.*) $1/index.html break;<tt>
+</tt>            }<tt>
+</tt>            if (-f $request_filename.html) {<tt>
+</tt>               rewrite (.*) $1.html break;<tt>
+</tt>            }<tt>
+</tt><tt>
+</tt>            if (!-f $request_filename) {<tt>
+</tt>               proxy_pass http://mongrel;<tt>
+</tt>               break;<tt>
+</tt>            }<tt>
+</tt>        }<tt>
+</tt>        location ~* ^.+\.(jpg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2| \<tt>
+</tt>                          doc|xls|exe|pdf|ppt|txt|tar|mid|midi|wav|bmp|rtf|js|mov).*?$ {<tt>
+</tt>            root /var/apps/rb/public;<tt>
+</tt>            if (!-f $request_filename) {<tt>
+</tt>                proxy_pass  http://mongrel;<tt>
+</tt>                break;<tt>
+</tt>            }<tt>
+</tt>        }<tt>
+</tt>        error_page   500 502 503 504  /50x.html;<tt>
+</tt>        location = /50x.html {<tt>
+</tt>            root   /var/apps/rb;<tt>
+</tt>        }<tt>
+</tt>    }<tt>
+</tt>}</pre></td>
+</tr></table>
+
+<p>Reboot and browse your site.</p>
+		
+	
+	<p class="comment_links">
+		<span class="postedby">Posted by rbrooks</span>
+		<span class="filedto">Filed in <a href="/ruby-on-rails">Ruby on Rails</a></span>
+	
+	</p>
+	
+</div>
+
+
+  <div class="commentsblock">
+    
+
+
+
+
+
+<form id="comment-form" method="post" action="/2007/4/21/install-nginx-mongrel-cluster-on-kubuntu/comments#comment-form">
+<fieldset id="addComment">
+	<legend runat="server" id="legComment">Add Comment</legend>
+
+	<p class="fieldReq">White fields are required.</p>
+
+	<div class="fieldReq">
+		<label for="author">Name :</label>
+		<input type="text" id="comment_author" name="comment[author]" value="" />
+	</div>
+	<div class="fieldNotReq">
+		<label for="email">Email :</label>
+		<input type="text" id="comment_author_email" name="comment[author_email]" value="" />
+	</div>
+	<div class="fieldNotReq">
+		<label for="url">Website :</label>
+		<input type="text" id="comment_author_url" name="comment[author_url]" value="" />
+	</div>
+	<div class="fieldReq">
+		<label for="comment">Comment :</label><br />
+		<textarea name="comment[body]" id="comment" rows="12"></textarea>
+	</div>
+</fieldset>
+<p><input name="submit" type="submit" id="submit" value="Post Comment" class="btn" /></p>
+</form>
+
+<p><strong>Posting Info:</strong> <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> and <a href="http://daringfireball.net/projects/smartypants/">SmartyPants</a> are supported for formatting and punctuation respectively. Your email address will never be published. Your name will link to your website address, if entered. Inappropriate comments will be edited or deleted.</p>
+
+
+
+  </div>
+
+
+
+				</div>
+    				<img src="/images/div_archives.gif" alt="Archives" style="float: left;" />
+	    			<div id="sidebar_right">
+    					<img src="/images/title_categories.gif" width="68" height="9" alt="Categories" title="Categories" class="sidebar_subhead" />
+					<ul>
+							<li><a href="/">Home</a></li><li><a href="/ruby-on-rails">Ruby on Rails</a></li><li><a href="/web-design">Web Design</a></li><li><a href="/artwork">Artwork</a></li><li><a href="/php">PHP</a></li>
+					</ul>
+					<form method="get" id="sform" action="/search">
+						<img src="/images/title_search.gif" width="43" height="9" alt="Search" title="Search" class="sidebar_subhead" /><br />
+						<div class="fieldNotReq">
+							<input type="text" id="q" value="" name="q" size="25" />
+						</div>
+					</form>
+    				</div>
+    			</div>
+			<div id="footer">
+	    			<p>
+        				<a href="/">HOME</a> |
+
+	<a href="/portfolio">Portfolio</a> | <a href="/links">Links</a> | <a href="/bio">Bio</a> | <a href="/colophon">Colophon</a> | 
+<br />
+        				Copyright &copy; 2007; Russell H. Brooks
+    				</p>
+    			</div>
+    		</div>
+    		<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    		<script type="text/javascript">
+    		    		_uacct = "UA-1695100-1";
+    		    		urchinTracker();
+    		</script>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   name=""
+   repos="svn://avatar"
+   revision="115"
+   last-author="Administrator"
+   uuid="83902b8e-9c7b-0d4c-b3a2-53228fd6c3fa"
+   url="svn://avatar/rb/public/stylesheets/mephisto"
+   committed-rev="96"
+   kind="dir"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+<entry
+   name="error.css"
+   checksum="a0f7ae64f0e43aef1e110313bfcb5d4b"
+   last-author="Administrator"
+   text-time="2007-02-19T04:27:30.000000Z"
+   committed-rev="96"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+<entry
+   name="fullscreen.css"
+   checksum="7d43d103e6956a748aed2935e10524e6"
+   last-author="Administrator"
+   text-time="2007-02-19T04:27:30.000000Z"
+   committed-rev="96"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+<entry
+   name="mephisto.css"
+   checksum="d5192f0f007e48c982085a6f0d413653"
+   last-author="Administrator"
+   text-time="2007-02-19T04:27:30.000000Z"
+   committed-rev="96"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+</wc-entries>

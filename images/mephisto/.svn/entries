@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   name=""
+   repos="svn://avatar"
+   revision="115"
+   last-author="Administrator"
+   uuid="83902b8e-9c7b-0d4c-b3a2-53228fd6c3fa"
+   url="svn://avatar/rb/public/images/mephisto"
+   committed-rev="96"
+   kind="dir"
+   committed-date="2007-02-19T04:27:30.324162Z"/>
+<entry
+   name="actnav-bg.gif"
+   checksum="95ea609adaf5efbd1978e80fd7b96caf"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="attribute-bg-left.gif"
+   checksum="a5782cfd09fc8d3cef347694e244afa8"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="attribute-bg.gif"
+   checksum="c1f6e71002563f07dac48116dfef5de3"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="attribute-pressed-left.gif"
+   checksum="0e3291bdf67b3c6ca5e030c12da8350a"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="attribute-pressed.gif"
+   checksum="5aad74e7e26de82fb90646060556e95c"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="avatar.gif"
+   checksum="d8c20f94d6be3e115e13a8ee4776abc1"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="cog-down.gif"
+   checksum="921d7cba6575d53be8def7fb36e827d9"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="cog.gif"
+   checksum="f3bde715439d7ae083b2de4decd6a507"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:11.000000Z"/>
+<entry
+   name="corner-shadow.gif"
+   checksum="93790abf7cb2ab6d7559fc60adb4899b"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="corners"
+   kind="dir"/>
+<entry
+   name="dashboard.png"
+   checksum="bad61cd757b6f9557dfdab62d06881fe"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="doc.png"
+   checksum="848a2a321dbd2ed05b35a02704e7c3cb"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="doclarge.png"
+   checksum="e57dde971896043b533f72859dd8394e"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="earthy.gif"
+   checksum="204ff160314118dbcb2f12c4d9db5655"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="hdr-bg.gif"
+   checksum="9855fc078d31215596b28d4cdeb984e1"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="icons"
+   kind="dir"/>
+<entry
+   name="logo.png"
+   checksum="c8adfd5ef069e783fd92ef6d50ea53a1"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="manual-filter-bg.gif"
+   checksum="eae016e0247afe1643d4709fcc97577f"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="mephisto.png"
+   checksum="a5040cd8f322b95e2eadbe6a9c2fd105"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:11.000000Z"/>
+<entry
+   name="preview.png"
+   checksum="dad39a20ed96dbaddbb5299afad3c52b"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="progress.gif"
+   checksum="6f196ea19441fdcea1d9780c5f1c7657"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="search-bg.gif"
+   checksum="966546c3136c40fd7dc691fefc68bb5e"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="shadow.png"
+   checksum="06450b2917613c79c11118ea8245ce72"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="spinner-small.gif"
+   checksum="d42bc67de95ee269eba51f60f73f4899"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="spinner.gif"
+   checksum="63032e69c0b98f6690494574906c9546"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="tab-bg.gif"
+   checksum="05b2f64b34b94a8fc77ed65b89110dd3"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+<entry
+   name="topshadow.png"
+   checksum="5d8fa4bfd22daf563148f1aca3c122c7"
+   last-author="Administrator"
+   committed-rev="96"
+   text-time="2007-02-19T04:27:30.000000Z"
+   kind="file"
+   committed-date="2007-02-19T04:27:30.324162Z"
+   prop-time="2007-03-17T21:13:08.000000Z"/>
+</wc-entries>

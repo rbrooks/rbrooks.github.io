@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Russell Brooks | Russ Brooks -   Install ImageMagick & RMagick on Ubuntu / Kubuntu </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link href="/stylesheets/main.css" rel="stylesheet" type="text/css" />
+	<link href="/stylesheets/lightbox.css" rel="stylesheet" type="text/css" />
+	<script src="/javascripts/lightbox2/prototype.js" type="text/javascript"></script>
+	<script src="/javascripts/lightbox2/scriptaculous.js?load=effects" type="text/javascript"></script>
+	<script src="/javascripts/lightbox2/lightbox.js" type="text/javascript"></script>
+	<link href="/feed/atom.xml" rel="alternate" type="application/atom+xml" />
+</head>
+	<body>
+		<div id="wrap">
+
+			<div id="nav">
+				<a href="/" class="home" id="current">&nbsp;</a>
+				<a href="/portfolio/" class="portfolio">&nbsp;</a>
+				<a href="/links/" class="links">&nbsp;</a>
+				<a href="/bio/" class="bio">&nbsp;</a>
+				<a href="/colophon/" class="colophon">&nbsp;</a>
+			</div>
+
+			<div id="banner">
+				<img id="bannerpic" src="/images/banner.jpg" width="816" height="186" alt="Autumn Sycamore, by: Russell Brooks" title="Autumn Sycamore, by: Russell Brooks" />
+			</div>
+
+			<img src="/images/div_shadow_line.gif" width="904" height="33" alt="" style="float: left;" /><div id="content">
+				<div id="content_left">
+					
+  
+<div class="entry entry-35">
+	<h2><a href="/2007/4/16/install-imagemagick-rmagick-on-ubuntu-kubuntu">Install ImageMagick &amp; RMagick on Ubuntu / Kubuntu</a></h2> 
+	<p class="date">April 16th, 2007</p>
+
+	
+		<p>Installing ImageMagick and RMagick on Kubuntu wasn&#8217;t so straight-forward. After following the official <a href="http://rmagick.rubyforge.org/install-linux.html">ImageMagick instructions</a>, when installing the RMagick gem, there were several errors regarding missing GhostScript fonts.</p>
+		
+		
+		
+		  <p>I discovered that ImageMagick&#8217;s &#8220;configure&#8221; script was looking in the wrong place. The script appears to look in the following locations:</p>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt>4<tt>
+</tt>5<tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">/usr/share/fonts/default/Type1/<tt>
+</tt>/usr/share/ghostscript/fonts/<tt>
+</tt>/usr/share/fonts/ghostscript/<tt>
+</tt>/sw/share/ghostscript/fonts<tt>
+</tt>/System/Library/Frameworks/Ghostscript.framework/Resources/fonts</pre></td>
+</tr></table>
+
+<p>But, Kubuntu&#8217;s fonts reside in:</p>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre><tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">/usr/share/fonts/type1/gsfonts</pre></td>
+</tr></table>
+
+<p>It was a matter of passing ImageMagick&#8217;s configure script an additional parameter with the correct font directory, <code>with-gs-font-dir=/usr/share/fonts/type1/gsfonts</code>.</p>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre>1<tt>
+</tt>2<tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">./configure --disable-static --with-modules --without-perl --without-magick-plus-plus \<tt>
+</tt>--with-quantum-depth=8 --with-gs-font-dir=/usr/share/fonts/type1/gsfonts</pre></td>
+</tr></table>
+
+<p>Now, you&#8217;ll be able to proceed with compiling ImageMagick&#8230;</p>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre>1<tt>
+</tt>2<tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">make<tt>
+</tt>sudo make install</pre></td>
+</tr></table>
+
+<p>&#8230;and installing the gem:</p>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre><tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">sudo gem install rmagick</pre></td>
+</tr></table>
+
+<p>If successful, you&#8217;ll see this:</p>
+
+<table class="CodeRay"><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">Bulk updating Gem source index for: http://gems.rubyforge.org<tt>
+</tt>Building native extensions.  This could take a while...<tt>
+</tt>Successfully installed rmagick-X.Y.Z</pre></td>
+</tr></table>
+		
+	
+	<p class="comment_links">
+		<span class="postedby">Posted by rbrooks</span>
+		<span class="filedto">Filed in <a href="/ruby-on-rails">Ruby on Rails</a></span>
+	
+	</p>
+	
+</div>
+
+
+  <div class="commentsblock">
+    
+
+
+
+
+
+<form id="comment-form" method="post" action="/2007/4/16/install-imagemagick-rmagick-on-ubuntu-kubuntu/comments#comment-form">
+<fieldset id="addComment">
+	<legend runat="server" id="legComment">Add Comment</legend>
+
+	<p class="fieldReq">White fields are required.</p>
+
+	<div class="fieldReq">
+		<label for="author">Name :</label>
+		<input type="text" id="comment_author" name="comment[author]" value="" />
+	</div>
+	<div class="fieldNotReq">
+		<label for="email">Email :</label>
+		<input type="text" id="comment_author_email" name="comment[author_email]" value="" />
+	</div>
+	<div class="fieldNotReq">
+		<label for="url">Website :</label>
+		<input type="text" id="comment_author_url" name="comment[author_url]" value="" />
+	</div>
+	<div class="fieldReq">
+		<label for="comment">Comment :</label><br />
+		<textarea name="comment[body]" id="comment" rows="12"></textarea>
+	</div>
+</fieldset>
+<p><input name="submit" type="submit" id="submit" value="Post Comment" class="btn" /></p>
+</form>
+
+<p><strong>Posting Info:</strong> <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> and <a href="http://daringfireball.net/projects/smartypants/">SmartyPants</a> are supported for formatting and punctuation respectively. Your email address will never be published. Your name will link to your website address, if entered. Inappropriate comments will be edited or deleted.</p>
+
+
+
+  </div>
+
+
+
+				</div>
+    				<img src="/images/div_archives.gif" alt="Archives" style="float: left;" />
+	    			<div id="sidebar_right">
+    					<img src="/images/title_categories.gif" width="68" height="9" alt="Categories" title="Categories" class="sidebar_subhead" />
+					<ul>
+							<li><a href="/">Home</a></li><li><a href="/ruby-on-rails">Ruby on Rails</a></li><li><a href="/web-design">Web Design</a></li><li><a href="/artwork">Artwork</a></li><li><a href="/php">PHP</a></li>
+					</ul>
+					<form method="get" id="sform" action="/search">
+						<img src="/images/title_search.gif" width="43" height="9" alt="Search" title="Search" class="sidebar_subhead" /><br />
+						<div class="fieldNotReq">
+							<input type="text" id="q" value="" name="q" size="25" />
+						</div>
+					</form>
+    				</div>
+    			</div>
+			<div id="footer">
+	    			<p>
+        				<a href="/">HOME</a> |
+
+	<a href="/portfolio">Portfolio</a> | <a href="/links">Links</a> | <a href="/bio">Bio</a> | <a href="/colophon">Colophon</a> | 
+<br />
+        				Copyright &copy; 2007; Russell H. Brooks
+    				</p>
+    			</div>
+    		</div>
+    		<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    		<script type="text/javascript">
+    		    		_uacct = "UA-1695100-1";
+    		    		urchinTracker();
+    		</script>
+	</body>
+</html>

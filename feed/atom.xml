@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
+  <title>Russell Brooks | Russ Brooks -  - Home</title>
+  <id>tag:www2.russbrooks.com,2007:mephisto/</id>
+  <generator version="0.7.3" uri="http://russbrooks.com">RussBrooks Noh-Varr</generator>
+  <link href="http://www2.russbrooks.com:8080/feed/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="http://www2.russbrooks.com:8080/" rel="alternate" type="text/html"/>
+  <updated>2007-04-22T03:09:05Z</updated>
+  <entry xml:base="http://www2.russbrooks.com:8080/">
+    <author>
+      <name>rbrooks</name>
+    </author>
+    <id>tag:www2.russbrooks.com:8080,2007-04-21:40</id>
+    <published>2007-04-21T22:44:00Z</published>
+    <updated>2007-04-22T03:09:05Z</updated>
+    <category term="Ruby on Rails"/>
+    <link href="http://www2.russbrooks.com:8080/2007/4/21/install-nginx-mongrel-cluster-on-kubuntu" rel="alternate" type="text/html"/>
+    <title>Install nginx and Mongrel Cluster on Kubuntu 7.04 [Feisty Fawn]</title>
+<summary type="html">&lt;p&gt;Here&#8217;s how to prepare your production environment for Rails applications.&lt;/p&gt;</summary><content type="html">
+            &lt;p&gt;Here&#8217;s how to prepare your production environment for Rails applications.&lt;/p&gt;
+&lt;p&gt;These instructions assume you already have Rails and Mongrel running successfully. Please see &lt;a href=&quot;/install-rails-on-kubuntu-7-04-feisty-fawn&quot;&gt;Install Rails On Kubuntu 7.04&lt;/a&gt; for instructions.&lt;/p&gt;
+
+&lt;h2&gt;Install nginx&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;K Menu &gt; System &gt; Adept Manager&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Search for &#8220;nginx&#8221;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Add it to your install queue by clicking &#8220;nginx&#8221; and chosing &#8220;Request Install&#8221;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Click &#8220;Apply Changes&#8221; in the top nav.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;Install Mongrel Cluster&lt;/h2&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;$ sudo gem install mongrel_cluster&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h2&gt;Run Them As Services on Boot&lt;/h2&gt;
+
+&lt;p&gt;The install package for &lt;strong&gt;nginx&lt;/strong&gt; already put a nice startup script in the &lt;code&gt;init.d&lt;/code&gt; directory for us.  &lt;strong&gt;Mongrel&lt;/strong&gt; came with a startup script too, but you&#8217;ll need to copy it to the &lt;code&gt;init.d&lt;/code&gt; directory [all one line with a space in between the two paths. Omit the backslash.]:&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;$ cp /usr/lib/ruby/gems/1.8/gems/mongrel_cluster-0.2.1/resources/mongrel_cluster \&lt;tt&gt;
+&lt;/tt&gt;/etc/init.d/mongrel_cluster&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Set permissions so they are executable [chmod] and make them automatically run as services on startup [update-rc.d].&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;$ sudo chmod +x /etc/init.d/nginx&lt;tt&gt;
+&lt;/tt&gt;$ sudo chmod +x /etc/init.d/mongrel_cluster&lt;tt&gt;
+&lt;/tt&gt;$ sudo update-rc.d nginx defaults&lt;tt&gt;
+&lt;/tt&gt;$ sudo update-rc.d mongrel_cluster defaults&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;em&gt;update-rc.d&lt;/em&gt; assumes your scripts reside in the &lt;code&gt;/etc/init.d&lt;/code&gt; directory. You don&#8217;t need to be in that directory nor specify the full path to the startup scripts.&lt;/p&gt;
+
+&lt;p&gt;Add a line to mongrel_cluster:&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;5&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;$ sudo nano /etc/init.d/mongrel_cluster&lt;tt&gt;
+&lt;/tt&gt;&amp;lt;macro:code&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;Add this line just above the CONF_DIR variable.&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;&amp;lt;macro:code lang=&amp;quot;plaintext&amp;quot;&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local:/usr/local/sbin:/usr/local/bin&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Create a sym link to your mongrel_cluster.yml file so the startup script can find it.&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;$ sudo rm /etc/mongrel_cluster&lt;tt&gt;
+&lt;/tt&gt;$ sudo mkdir /etc/mongrel_cluster&lt;tt&gt;
+&lt;/tt&gt;$ cd /etc/mongrel_cluster&lt;tt&gt;
+&lt;/tt&gt;$ ln -s /var/apps/rails/rb.com/config/mongrel_cluster.yml&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Alter path of that last command to match the path to your live app.&lt;/p&gt;
+
+&lt;h2&gt;nginx Config File&lt;/h2&gt;
+
+&lt;p&gt;The nginx configuration file need to be needs to be updated to suit your environment. My nginx.conf file looks like this [comments removed to save space].  Note that my config file is serving my app over port 8080. You would normally use port 80. [Backslashes indicate line continuation.]&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;5&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;13&lt;tt&gt;
+&lt;/tt&gt;14&lt;tt&gt;
+&lt;/tt&gt;15&lt;tt&gt;
+&lt;/tt&gt;16&lt;tt&gt;
+&lt;/tt&gt;17&lt;tt&gt;
+&lt;/tt&gt;18&lt;tt&gt;
+&lt;/tt&gt;19&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;20&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;21&lt;tt&gt;
+&lt;/tt&gt;22&lt;tt&gt;
+&lt;/tt&gt;23&lt;tt&gt;
+&lt;/tt&gt;24&lt;tt&gt;
+&lt;/tt&gt;25&lt;tt&gt;
+&lt;/tt&gt;26&lt;tt&gt;
+&lt;/tt&gt;27&lt;tt&gt;
+&lt;/tt&gt;28&lt;tt&gt;
+&lt;/tt&gt;29&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;30&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;31&lt;tt&gt;
+&lt;/tt&gt;32&lt;tt&gt;
+&lt;/tt&gt;33&lt;tt&gt;
+&lt;/tt&gt;34&lt;tt&gt;
+&lt;/tt&gt;35&lt;tt&gt;
+&lt;/tt&gt;36&lt;tt&gt;
+&lt;/tt&gt;37&lt;tt&gt;
+&lt;/tt&gt;38&lt;tt&gt;
+&lt;/tt&gt;39&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;40&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;41&lt;tt&gt;
+&lt;/tt&gt;42&lt;tt&gt;
+&lt;/tt&gt;43&lt;tt&gt;
+&lt;/tt&gt;44&lt;tt&gt;
+&lt;/tt&gt;45&lt;tt&gt;
+&lt;/tt&gt;46&lt;tt&gt;
+&lt;/tt&gt;47&lt;tt&gt;
+&lt;/tt&gt;48&lt;tt&gt;
+&lt;/tt&gt;49&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;50&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;51&lt;tt&gt;
+&lt;/tt&gt;52&lt;tt&gt;
+&lt;/tt&gt;53&lt;tt&gt;
+&lt;/tt&gt;54&lt;tt&gt;
+&lt;/tt&gt;55&lt;tt&gt;
+&lt;/tt&gt;56&lt;tt&gt;
+&lt;/tt&gt;57&lt;tt&gt;
+&lt;/tt&gt;58&lt;tt&gt;
+&lt;/tt&gt;59&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;60&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;61&lt;tt&gt;
+&lt;/tt&gt;62&lt;tt&gt;
+&lt;/tt&gt;63&lt;tt&gt;
+&lt;/tt&gt;64&lt;tt&gt;
+&lt;/tt&gt;65&lt;tt&gt;
+&lt;/tt&gt;66&lt;tt&gt;
+&lt;/tt&gt;67&lt;tt&gt;
+&lt;/tt&gt;68&lt;tt&gt;
+&lt;/tt&gt;69&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;70&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;71&lt;tt&gt;
+&lt;/tt&gt;72&lt;tt&gt;
+&lt;/tt&gt;73&lt;tt&gt;
+&lt;/tt&gt;74&lt;tt&gt;
+&lt;/tt&gt;75&lt;tt&gt;
+&lt;/tt&gt;76&lt;tt&gt;
+&lt;/tt&gt;77&lt;tt&gt;
+&lt;/tt&gt;78&lt;tt&gt;
+&lt;/tt&gt;79&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;80&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;81&lt;tt&gt;
+&lt;/tt&gt;82&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;worker_processes  2;&lt;tt&gt;
+&lt;/tt&gt;error_log  /var/log/nginx/error.log;&lt;tt&gt;
+&lt;/tt&gt;pid        /var/run/nginx.pid;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;events {&lt;tt&gt;
+&lt;/tt&gt;    worker_connections  1024;&lt;tt&gt;
+&lt;/tt&gt;}&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;http {&lt;tt&gt;
+&lt;/tt&gt;    include      /etc/nginx/mime.types;&lt;tt&gt;
+&lt;/tt&gt;    default_type application/octet-stream;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;    log_format  main  '$remote_addr - $remote_user [$time_local] $request '&lt;tt&gt;
+&lt;/tt&gt;                      '&amp;quot;$status&amp;quot; $body_bytes_sent &amp;quot;$http_referer&amp;quot; '&lt;tt&gt;
+&lt;/tt&gt;                      '&amp;quot;$http_user_agent&amp;quot; &amp;quot;$http_x_forwarded_for&amp;quot;';&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;    access_log         /var/log/nginx/access.log;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;    sendfile           on;&lt;tt&gt;
+&lt;/tt&gt;    tcp_nopush         on;&lt;tt&gt;
+&lt;/tt&gt;    tcp_nodelay        on;&lt;tt&gt;
+&lt;/tt&gt;    keepalive_timeout  65;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;    gzip               on;&lt;tt&gt;
+&lt;/tt&gt;    gzip_http_version  1.0;&lt;tt&gt;
+&lt;/tt&gt;    gzip_comp_level    2;&lt;tt&gt;
+&lt;/tt&gt;    gzip_proxied       any;&lt;tt&gt;
+&lt;/tt&gt;    gzip_types         text/plain text/html text/css application/x-javascript text/xml \&lt;tt&gt;
+&lt;/tt&gt;                       application/xml application/xml+rss text/javascript;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;    upstream mongrel {&lt;tt&gt;
+&lt;/tt&gt;        server 127.0.0.1:8000;&lt;tt&gt;
+&lt;/tt&gt;        server 127.0.0.1:8001;&lt;tt&gt;
+&lt;/tt&gt;        server 127.0.0.1:8002;&lt;tt&gt;
+&lt;/tt&gt;    }&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;    server {&lt;tt&gt;
+&lt;/tt&gt;        listen         8080;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;        root /var/apps/rails/rb/public;&lt;tt&gt;
+&lt;/tt&gt;        index index.html index.htm;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;        client_max_body_size    50M;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;        access_log  /var/log/nginx/localhost.access.log;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;        location / {&lt;tt&gt;
+&lt;/tt&gt;            proxy_set_header  X-Real-IP  $remote_addr;&lt;tt&gt;
+&lt;/tt&gt;            proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;&lt;tt&gt;
+&lt;/tt&gt;            proxy_set_header  Host $http_host;&lt;tt&gt;
+&lt;/tt&gt;            proxy_redirect    false;&lt;tt&gt;
+&lt;/tt&gt;            proxy_max_temp_file_size 0;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;            if (-f $request_filename) {&lt;tt&gt;
+&lt;/tt&gt;               break;&lt;tt&gt;
+&lt;/tt&gt;            }&lt;tt&gt;
+&lt;/tt&gt;            if (-f $request_filename/index.html) {&lt;tt&gt;
+&lt;/tt&gt;               rewrite (.*) $1/index.html break;&lt;tt&gt;
+&lt;/tt&gt;            }&lt;tt&gt;
+&lt;/tt&gt;            if (-f $request_filename.html) {&lt;tt&gt;
+&lt;/tt&gt;               rewrite (.*) $1.html break;&lt;tt&gt;
+&lt;/tt&gt;            }&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;            if (!-f $request_filename) {&lt;tt&gt;
+&lt;/tt&gt;               proxy_pass http://mongrel;&lt;tt&gt;
+&lt;/tt&gt;               break;&lt;tt&gt;
+&lt;/tt&gt;            }&lt;tt&gt;
+&lt;/tt&gt;        }&lt;tt&gt;
+&lt;/tt&gt;        location ~* ^.+\.(jpg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2| \&lt;tt&gt;
+&lt;/tt&gt;                          doc|xls|exe|pdf|ppt|txt|tar|mid|midi|wav|bmp|rtf|js|mov).*?$ {&lt;tt&gt;
+&lt;/tt&gt;            root /var/apps/rb/public;&lt;tt&gt;
+&lt;/tt&gt;            if (!-f $request_filename) {&lt;tt&gt;
+&lt;/tt&gt;                proxy_pass  http://mongrel;&lt;tt&gt;
+&lt;/tt&gt;                break;&lt;tt&gt;
+&lt;/tt&gt;            }&lt;tt&gt;
+&lt;/tt&gt;        }&lt;tt&gt;
+&lt;/tt&gt;        error_page   500 502 503 504  /50x.html;&lt;tt&gt;
+&lt;/tt&gt;        location = /50x.html {&lt;tt&gt;
+&lt;/tt&gt;            root   /var/apps/rb;&lt;tt&gt;
+&lt;/tt&gt;        }&lt;tt&gt;
+&lt;/tt&gt;    }&lt;tt&gt;
+&lt;/tt&gt;}&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Reboot and browse your site.&lt;/p&gt;
+          </content>  </entry>
+  <entry xml:base="http://www2.russbrooks.com:8080/">
+    <author>
+      <name>rbrooks</name>
+    </author>
+    <id>tag:www2.russbrooks.com:8080,2007-04-21:39</id>
+    <published>2007-04-21T22:29:00Z</published>
+    <updated>2007-04-21T22:29:54Z</updated>
+    <category term="Ruby on Rails"/>
+    <link href="http://www2.russbrooks.com:8080/2007/4/21/install-rails-on-kubuntu-7-04-feisty-fawn" rel="alternate" type="text/html"/>
+    <title>Install Rails on Kubuntu 7.04 [Feisty Fawn]</title>
+<summary type="html">&lt;p&gt;Kubuntu 7.04 was just released this week. I documented my setup of Ruby on Rails.&lt;/p&gt;</summary><content type="html">
+            &lt;p&gt;Kubuntu 7.04 was just released this week. I documented my setup of Ruby on Rails.&lt;/p&gt;
+&lt;h2&gt;Install Ruby and Dependencies&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;K Menu &gt; System &gt; Adept Manager&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Adept &gt; Manage Repositories&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Search for &#8220;ruby&#8221; [no quotes]&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Add the following to your install queue by clicking each one chosing &#8220;Request Install&#8221;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ri&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;rake&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;rdoc&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ruby1.8-dev&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;rubygems&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;strong&gt;irb&lt;/strong&gt; and &lt;strong&gt;ruby&lt;/strong&gt; packages should already be installed.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Search for &#8220;build-essentials&#8221;.  Add it to your install queue.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;build-essentials&lt;/strong&gt; - Required for Mongrel gem install later&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;Database&lt;/h2&gt;
+
+&lt;p&gt;Still in Adept:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Search for &#8220;sqlite&#8221;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Add these packages to your queue:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;libsqlite3-ruby&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;sqlite3&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You may use the same method above to install other database technologies.  Just find both files for your database product&#8212;the Ruby library file [eg, libmysql-ruby] and the database app/server itself [eg, mysql-server].&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Click &#8220;Apply Changes&#8221; in the top toolbar.  All packages will be installed.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;Update Gems&lt;/h2&gt;
+
+&lt;p&gt;Close Adept. This will be the console portion of our install.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;K Menu &gt; System &gt; Konsole&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Update RubyGems&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;$ sudo gem update --system&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h2&gt;Install Rails&lt;/h2&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;$ sudo gem install rails --include-dependencies&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;The &#8211;include-dependencies switch causes an unattended install. It automatically answers &#8220;yes&#8221; in the background to any questions about dependencies.  It saves you from having to click &#8220;Y&#8221; several times.&lt;/p&gt;
+
+&lt;h2&gt;Web Server&lt;/h2&gt;
+
+&lt;h3&gt;Install Mongrel&lt;/h3&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;$ sudo gem install mongrel&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;You will be asked which version to install.  Choose the latest &#8220;ruby&#8221; verion [not mswin32]. Answer &#8220;Y&#8221; to any questions about dependencies.&lt;/p&gt;
+
+&lt;h2&gt;Verify Install&lt;/h2&gt;
+
+&lt;h3&gt;Verify Apps and Frameworks&lt;/h3&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;$ ruby --version&lt;tt&gt;
+&lt;/tt&gt;$ rails --version&lt;tt&gt;
+&lt;/tt&gt;$ sqlite3 --version&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;You should see a version returned for each command above.&lt;/p&gt;
+
+&lt;h3&gt;Verify Gems&lt;/h3&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;$ gem list&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;You should see the following gems:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;actionmailer&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;actionpack&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;actionwebservice&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;activerecord&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;activesupport&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;cgi_multipart_eof_fix&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;daemons&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;fastthread&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;gem_plugin&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;mongrel&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;rails&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;rake&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;sources&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Verify Web Server&lt;/h3&gt;
+
+&lt;p&gt;Change to the directory of a Rails app and start Mongrel.&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;$ cd /home/russ/dev/rails/rb.com&lt;tt&gt;
+&lt;/tt&gt;$ mongrel_rails start&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;If you do not have a Rails app, you can create one by typing &#8221;&lt;code&gt;rails test&lt;/code&gt;&#8221; in the directory where you would like to keep you Rails development apps.  This creates a skeletal Rails app called &#8220;test&#8221;.&lt;/p&gt;
+
+&lt;p&gt;Browse &lt;a href=&quot;http://localhost:3000&quot;&gt;http://localhost:3000&lt;/a&gt; in a browser. Your Rails app will display.&lt;/p&gt;
+
+&lt;p&gt;Exit Mongrel at the Konsole with Ctrl-C.&lt;/p&gt;
+          </content>  </entry>
+  <entry xml:base="http://www2.russbrooks.com:8080/">
+    <author>
+      <name>rbrooks</name>
+    </author>
+    <id>tag:www2.russbrooks.com:8080,2007-04-20:38</id>
+    <published>2007-04-20T04:48:00Z</published>
+    <updated>2007-04-22T03:45:44Z</updated>
+    <category term="PHP"/>
+    <category term="Ruby on Rails"/>
+    <link href="http://www2.russbrooks.com:8080/2007/4/20/perfectly-formatted-xhtml-with-php-or-rails" rel="alternate" type="text/html"/>
+    <title>Perfectly Formatted XHTML with PHP or Rails</title>
+<summary type="html">&lt;h2&gt;Old School&lt;/h2&gt;
+
+&lt;p&gt;Here is a common method of outputting table rows to the page in PHP.  The benefits are that it is probably a microsecond faster due to lack of context-switching.  The problem is that the XHTML output is horrendous.&lt;/p&gt;</summary><content type="html">
+            &lt;h2&gt;Old School&lt;/h2&gt;
+
+&lt;p&gt;Here is a common method of outputting table rows to the page in PHP.  The benefits are that it is probably a microsecond faster due to lack of context-switching.  The problem is that the XHTML output is horrendous.&lt;/p&gt;
+&lt;p&gt;It&#8217;s difficult to see what&#8217;s going on in the PHP portion of the page.  Our XHTML is marred with echo() statements.  Visually, it&#8217;s a mess&#8212;difficult for the human eye to work with, on both the code side and browser side.&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;5&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;13&lt;tt&gt;
+&lt;/tt&gt;14&lt;tt&gt;
+&lt;/tt&gt;15&lt;tt&gt;
+&lt;/tt&gt;16&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;$rs = $DB-&amp;gt;Execute(&amp;quot;SELECT * FROM products WHERE cat_id = 123&amp;quot;);&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;echo('&amp;lt;table&amp;gt;');&lt;tt&gt;
+&lt;/tt&gt;while (!$rs-&amp;gt;EOF()) {&lt;tt&gt;
+&lt;/tt&gt;    echo('&amp;lt;tr&amp;gt;');&lt;tt&gt;
+&lt;/tt&gt;    echo('&amp;lt;td&amp;gt;');&lt;tt&gt;
+&lt;/tt&gt;    echo($rs-&amp;gt;Fields['name']);&lt;tt&gt;
+&lt;/tt&gt;    echo('&amp;lt;/td&amp;gt;');&lt;tt&gt;
+&lt;/tt&gt;    echo('&amp;lt;td&amp;gt;');&lt;tt&gt;
+&lt;/tt&gt;    echo($rs-&amp;gt;Fields['price']);&lt;tt&gt;
+&lt;/tt&gt;    echo('&amp;lt;/td&amp;gt;');&lt;tt&gt;
+&lt;/tt&gt;    echo('&amp;lt;/tr&amp;gt;');&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;    $rs-&amp;gt;MoveNext();&lt;tt&gt;
+&lt;/tt&gt;}&lt;tt&gt;
+&lt;/tt&gt;echo('&amp;lt;/table&amp;gt;');&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h3&gt;Browser Output&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;table&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Widgets&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;$29.95&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;/table&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, the above causes XHTML output to be flush left and all on the same line.  With large pages of this type of XHTML, debugging rendering issues becomes arduous.  It&#8217;s very difficult to find the culprit of a mysterious browser issue when your XHTML is unformatted.&lt;/p&gt;
+
+&lt;h2&gt;Mixed-Mode Old School&lt;/h2&gt;
+
+&lt;p&gt;To get around this, you will see developers use mixed-mode, but use it so that the XHTML is better, but still not formatted 100% correct.&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;5&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&amp;lt;table&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;&amp;lt;? $rs = $DB-&amp;gt;Execute(&amp;quot;SELECT * FROM products WHERE cat_id = 123&amp;quot;);&lt;tt&gt;
+&lt;/tt&gt;while (!$rs-&amp;gt;EOF()) { ?&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;    &amp;lt;tr&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;        &amp;lt;td&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;            &amp;lt;?= $rs-&amp;gt;Fields['name']; ?&amp;gt;&amp;lt;/td&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;    &amp;lt;/tr&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;&amp;lt;?&lt;tt&gt;
+&lt;/tt&gt;    $rs-&amp;gt;MoveNext();&lt;tt&gt;
+&lt;/tt&gt;}?&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;&amp;lt;/table&amp;gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;This is better, but let&#8217;s look at the output.&lt;/p&gt;
+
+&lt;h3&gt;Browser Output&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;table&amp;gt;
+
+    &amp;lt;tr&amp;gt;
+        &amp;lt;td&amp;gt;
+            Widgets&amp;lt;/td&amp;gt;
+        &amp;lt;td&amp;gt;
+            $29.95&amp;lt;/td&amp;gt;
+    &amp;lt;/tr&amp;gt;
+
+    &amp;lt;tr&amp;gt;
+        &amp;lt;td&amp;gt;
+            Widgets&amp;lt;/td&amp;gt;
+        &amp;lt;td&amp;gt;
+            $29.95&amp;lt;/td&amp;gt;
+    &amp;lt;/tr&amp;gt;
+
+&amp;lt;/table&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notice the undesirable, extra carriage returns within the table rows.  Let&#8217;s move those PHP delimiters to consume those carriage returns and produce perfect XHTML.&lt;/p&gt;
+
+&lt;h2&gt;Perfection&lt;/h2&gt;
+
+&lt;p&gt;If you are an XHTML perfectionist, a better method is to align the PHP delimiters so  the XHTML is formatted perfectly.  Everything from opening delimiter to closing one renders to the browser as a null.  To see what the browser output will look like, in your code editor, highlight the PHP code from opening delimiter to closing.  Ctrl-X or Delete to cut it out of your code.  The result is what will output to the browser.  Undo the cut, Ctrl-Z.&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;5&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&amp;lt;table&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;&amp;lt;?&lt;tt&gt;
+&lt;/tt&gt;$rs = $DB-&amp;gt;Execute(&amp;quot;SELECT * FROM products WHERE cat_id = 123&amp;quot;);&lt;tt&gt;
+&lt;/tt&gt;while (!$rs-&amp;gt;EOF()) {&lt;tt&gt;
+&lt;/tt&gt;?&amp;gt;    &amp;lt;tr&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;        &amp;lt;td&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;            &amp;lt;?= $rs-&amp;gt;Fields['name']; ?&amp;gt;&amp;lt;/td&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;    &amp;lt;/tr&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;&amp;lt;?&lt;tt&gt;
+&lt;/tt&gt;}&lt;tt&gt;
+&lt;/tt&gt;?&amp;gt;&amp;lt;/table&amp;gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h3&gt;Browser Output&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;table&amp;gt;
+    &amp;lt;tr&amp;gt;
+        &amp;lt;td&amp;gt;
+            Widgets&amp;lt;/td&amp;gt;
+        &amp;lt;td&amp;gt;
+            $29.95&amp;lt;/td&amp;gt;
+    &amp;lt;/tr&amp;gt;
+&amp;lt;/table&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When used correctly, this technique can output perfect XHTML from page top to bottom&#8212;perfect indentation, perfect carriage returns.&lt;/p&gt;
+
+&lt;p&gt;You can let the PHP code follow its own indentation context on the left side. Let the XHTML markup follow its own indent context as well.  In other words, indent the PHP, based on the PHP, regardless of the XHTML.  Indent the HTML based on the HTML&#8212;ignore the PHP.  Once you get used to looking at the code this way, it&#8217;s much faster to wield.  You can glance at page full of PHP/XHTML mix and immediately see the PHP vs. the XHTML - each in its own indentation context.  I should have a Photoshop shot up soon of what I mean by this.&lt;/p&gt;
+
+&lt;h2&gt;The Rails Way&lt;/h2&gt;
+
+&lt;p&gt;Rails has an ingenious way of dealing with this problem.  I was so impressed that the Rails developers had thought to include this.  XHTML rendering was of significant importance to someone besides me.  You simply terminate your block of Ruby code with a minus sign [-] in front of the closing delimiter -%&gt;.  This causes the carriage return to not render.  Brilliant.  Thank you, Rails developers.  I&#8217;ve been waiting about six years for someone solve the problem.&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;5&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&amp;lt;li&amp;gt;&amp;lt;%= link_to 'Website', dispatch_path([]) %&amp;gt;&amp;lt;/li&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;&amp;lt;% if admin? -%&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;&amp;lt;li&amp;gt;&amp;lt;%= link_to 'Settings', :controller =&amp;gt; 'settings' %&amp;gt;&amp;lt;/li&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;&amp;lt;% end -%&amp;gt;&lt;tt&gt;
+&lt;/tt&gt;&amp;lt;li&amp;gt;&amp;lt;%= link_to &amp;quot;Users&amp;quot;,    :controller =&amp;gt; &amp;quot;users&amp;quot; %&amp;gt;&amp;lt;/li&amp;gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h3&gt;Browser Output&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;li&amp;gt;&amp;lt;a href=&quot;&quot;&amp;gt;Website&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;a href=&quot;&quot;&amp;gt;Settings&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;a href=&quot;&quot;&amp;gt;Users&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notice there are no carriage returns between elements.  Use the -%&gt; religiously.&lt;/p&gt;
+          </content>  </entry>
+  <entry xml:base="http://www2.russbrooks.com:8080/">
+    <author>
+      <name>rbrooks</name>
+    </author>
+    <id>tag:www2.russbrooks.com:8080,2007-04-16:35</id>
+    <published>2007-04-16T04:27:00Z</published>
+    <updated>2007-04-16T05:08:45Z</updated>
+    <category term="Ruby on Rails"/>
+    <link href="http://www2.russbrooks.com:8080/2007/4/16/install-imagemagick-rmagick-on-ubuntu-kubuntu" rel="alternate" type="text/html"/>
+    <title>Install ImageMagick &amp; RMagick on Ubuntu / Kubuntu</title>
+<summary type="html">&lt;p&gt;Installing ImageMagick and RMagick on Kubuntu wasn&#8217;t so straight-forward. After following the official &lt;a href=&quot;http://rmagick.rubyforge.org/install-linux.html&quot;&gt;ImageMagick instructions&lt;/a&gt;, when installing the RMagick gem, there were several errors regarding missing GhostScript fonts.&lt;/p&gt;</summary><content type="html">
+            &lt;p&gt;Installing ImageMagick and RMagick on Kubuntu wasn&#8217;t so straight-forward. After following the official &lt;a href=&quot;http://rmagick.rubyforge.org/install-linux.html&quot;&gt;ImageMagick instructions&lt;/a&gt;, when installing the RMagick gem, there were several errors regarding missing GhostScript fonts.&lt;/p&gt;
+&lt;p&gt;I discovered that ImageMagick&#8217;s &#8220;configure&#8221; script was looking in the wrong place. The script appears to look in the following locations:&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;5&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;/usr/share/fonts/default/Type1/&lt;tt&gt;
+&lt;/tt&gt;/usr/share/ghostscript/fonts/&lt;tt&gt;
+&lt;/tt&gt;/usr/share/fonts/ghostscript/&lt;tt&gt;
+&lt;/tt&gt;/sw/share/ghostscript/fonts&lt;tt&gt;
+&lt;/tt&gt;/System/Library/Frameworks/Ghostscript.framework/Resources/fonts&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;But, Kubuntu&#8217;s fonts reside in:&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;/usr/share/fonts/type1/gsfonts&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;It was a matter of passing ImageMagick&#8217;s configure script an additional parameter with the correct font directory, &lt;code&gt;with-gs-font-dir=/usr/share/fonts/type1/gsfonts&lt;/code&gt;.&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;./configure --disable-static --with-modules --without-perl --without-magick-plus-plus \&lt;tt&gt;
+&lt;/tt&gt;--with-quantum-depth=8 --with-gs-font-dir=/usr/share/fonts/type1/gsfonts&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Now, you&#8217;ll be able to proceed with compiling ImageMagick&#8230;&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;make&lt;tt&gt;
+&lt;/tt&gt;sudo make install&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&#8230;and installing the gem:&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;sudo gem install rmagick&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;If successful, you&#8217;ll see this:&lt;/p&gt;
+
+&lt;table class=&quot;CodeRay&quot;&gt;&lt;tr&gt;
+  &lt;td title=&quot;click to toggle&quot; class=&quot;line_numbers&quot;&gt;&lt;pre&gt;1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;&lt;/pre&gt;&lt;/td&gt;
+  &lt;td class=&quot;code&quot;&gt;&lt;pre&gt;Bulk updating Gem source index for: http://gems.rubyforge.org&lt;tt&gt;
+&lt;/tt&gt;Building native extensions.  This could take a while...&lt;tt&gt;
+&lt;/tt&gt;Successfully installed rmagick-X.Y.Z&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+          </content>  </entry>
+  <entry xml:base="http://www2.russbrooks.com:8080/">
+    <author>
+      <name>rbrooks</name>
+    </author>
+    <id>tag:www2.russbrooks.com:8080,2007-04-12:33</id>
+    <published>2007-04-12T04:12:00Z</published>
+    <updated>2007-04-15T23:40:06Z</updated>
+    <category term="Web Design"/>
+    <link href="http://www2.russbrooks.com:8080/2007/4/12/new-site-launched" rel="alternate" type="text/html"/>
+    <title>New Site Launched!</title>
+<summary type="html">&lt;p&gt;Welcome to my all new site, written in &lt;a href=&quot;http://www.rubyonrails.org/&quot;&gt;Ruby on Rails&lt;/a&gt;, running on &lt;a href=&quot;http://www.kubuntu.org/&quot;&gt;Kubuntu&lt;/a&gt; Linux.&lt;/p&gt;</summary><content type="html">
+            &lt;p&gt;Welcome to my all new site, written in &lt;a href=&quot;http://www.rubyonrails.org/&quot;&gt;Ruby on Rails&lt;/a&gt;, running on &lt;a href=&quot;http://www.kubuntu.org/&quot;&gt;Kubuntu&lt;/a&gt; Linux.&lt;/p&gt;
+&lt;p&gt;I&#8217;ve been developing Microsoft-based solutions for just about my entire life, but a recent fascination with Ruby on Rails has inexorably pulled me to the Linux side of force.   This site represents a learning experiment for me&#8212;a chance to broaden my horizons, embrace an entirely different computing platform and, hopefully, increase my worth in the software engineering industry.  Developing on and learning about Linux has been quite enlightening and downright fun!  I&#8217;ve dabbled with Linux on and off in the past, but it has never quite impressed me as much as it has recently.&lt;/p&gt;
+
+&lt;p&gt;I plan to use this site as a dumping ground for my endeavors into the &lt;a href=&quot;http://www.ruby-lang.org&quot;&gt;Ruby language&lt;/a&gt;, the Rails framework, PHP, ASP.NET, and anything else I&#8217;d like to make permanent public record.  I&#8217;m sure some of my non-geeky interests will find their way in as well, but I&#8217;ll try not to bore you too much with those.&lt;/p&gt;
+          </content>  </entry>
+</feed>
